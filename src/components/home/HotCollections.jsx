@@ -8,6 +8,7 @@ import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
   const { nftId } = useParams();
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const settings = {
     responsive:{
@@ -22,29 +23,16 @@ const HotCollections = () => {
       }
     }
   }
-  const[img, setImg] = useState();
-  const mountedRef = useRef(true);
+  const[loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchPosts() {
-      const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections/nftId=${nftId}`)
+      const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections/nftId`)
       setPosts(data);
+      setLoading(false);
     }
     fetchPosts();    
   },[]);
-
-  useEffect(() => {
-    const image = new Image();
-    image.src = posts.nftImage;
-    image.onload = () => {
-      if(mountedRef.current){
-        setImg(image);
-      }
-    };
-    return () => {
-      mountedRef.current = false;
-    }
-  });
 
   return (
     <section id="section-collections" className="no-bottom">
@@ -57,16 +45,49 @@ const HotCollections = () => {
             </div>
           </div>
           {
-            img ? 
-              <>
-                <OwlCarousel
+            loading ? 
+              (
+                <>
+                  <OwlCarousel
+                  loop
+                  margin={10}
+                  nav
+                  {...settings}
+                  >
+                  {posts.map((post) => (
+                      <div key ={post.id} className="nft_coll" >
+                        <div className="nft_wrap" onClick={() => navigate(`${post.authorId}`)}>
+                          <Link to={`/item-details/`} >
+                            <img src={post.nftImage} className="lazy img-fluid" alt=""/>
+                          </Link>
+                        </div>
+                        <div className="nft_coll_pp" onClick={() => navigate(`${post.authorId}`)}>
+                          <Link to="/author" >
+                            <img className="lazy pp-coll" src={post.authorImage} alt=""/>
+                          </Link>
+                          <i className="fa fa-check"></i>
+                        </div>
+                        <div className="nft_coll_info">
+                          <Link to="/explore">
+                            <h4>{post.title}</h4>
+                          </Link>
+                          <span>ERC-{post.code}</span>
+                        </div>
+                      </div>
+                  ))} 
+                  </OwlCarousel> 
+                </>
+              )
+            : (
+                <>
+               <OwlCarousel
                   loop
                   margin={10}
                   nav
                   {...settings}
                 >
                   {posts.map((post) => (
-                      <div className="nft_coll">
+                      <div className="nft_coll" key ={post.id}>
                         <div className="nft_wrap">
                           <Link to={`/item-details/`}>
                             <Skeleton />
@@ -88,39 +109,8 @@ const HotCollections = () => {
                   ))} 
                 </OwlCarousel> 
               </>
-            : <>
-              <OwlCarousel
-                loop
-                margin={10}
-                nav
-                {...settings}
-              >
-                {posts.map((post) => (
-                    <div className="nft_coll">
-                      <div className="nft_wrap">
-                        <Link to={`/item-details/`}>
-                          <img src={post.nftImage} className="lazy img-fluid" alt=""/>
-                        </Link>
-                      </div>
-                      <div className="nft_coll_pp">
-                        <Link to="/author">
-                          <img className="lazy pp-coll" src={post.authorImage} alt=""/>
-                        </Link>
-                        <i className="fa fa-check"></i>
-                      </div>
-                      <div className="nft_coll_info">
-                        <Link to="/explore">
-                          <h4>{post.title}</h4>
-                        </Link>
-                        <span>ERC-{post.code}</span>
-                      </div>
-                    </div>
-                ))} 
-              </OwlCarousel>  
-            </>
+              )
           }
-          
-          
         </div>
       </div>
     </section>
