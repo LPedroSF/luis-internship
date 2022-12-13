@@ -45,9 +45,38 @@ const HotCollections = () => {
             </div>
           </div>
           {
-            loading ? 
+            loading ?
+               <OwlCarousel
+                  loop
+                  margin={10}
+                  nav
+                  {...settings}
+                >
+                  {posts.map((post) => (
+                      <div className="nft_coll" key ={post.id}>
+                        <div className="nft_wrap">
+                          <Link to={`/item-details/`}>
+                            <Skeleton width="100%" height="200px"/>
+                          </Link>
+                        </div>
+                        <div className="nft_coll_pp">
+                          <Link to="/author">
+                            <Skeleton width ="100%" height="40px" borderRadius="100%"/>
+                          </Link>
+                          <i className="fa fa-check"></i>
+                        </div>
+                        <div className="nft_coll_info">
+                          <Link to="/explore">
+                            <Skeleton width="70%"/>
+                          </Link>
+                          <br />
+                          <span><Skeleton width="50px" /></span>
+                        </div>
+                      </div>
+                  ))} 
+                </OwlCarousel> 
+            : (
               (
-                <>
                   <OwlCarousel
                   loop
                   margin={10}
@@ -76,39 +105,7 @@ const HotCollections = () => {
                       </div>
                   ))} 
                   </OwlCarousel> 
-                </>
               )
-            : (
-                <>
-               <OwlCarousel
-                  loop
-                  margin={10}
-                  nav
-                  {...settings}
-                >
-                  {posts.map((post) => (
-                      <div className="nft_coll" key ={post.id}>
-                        <div className="nft_wrap">
-                          <Link to={`/item-details/`}>
-                            <Skeleton />
-                          </Link>
-                        </div>
-                        <div className="nft_coll_pp">
-                          <Link to="/author">
-                            <Skeleton />
-                          </Link>
-                          <i className="fa fa-check"></i>
-                        </div>
-                        <div className="nft_coll_info">
-                          <Link to="/explore">
-                            <Skeleton />
-                          </Link>
-                          <span>ERC-{post.code}</span>
-                        </div>
-                      </div>
-                  ))} 
-                </OwlCarousel> 
-              </>
               )
           }
         </div>
