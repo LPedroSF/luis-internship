@@ -14,7 +14,3 @@
 .show-counter .countdown > p {
     margin: 0;
 }
-
-.show-counter .countdown > span {
-    line-height: 1rem;
-}
