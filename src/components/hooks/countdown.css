@@ -1,0 +1,20 @@
+.show-counter{
+    padding: 0.5rem;
+    display: flex;
+}
+
+.show-counter .countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-right: 2px;
+}
+
+.show-counter .countdown > p {
+    margin: 0;
+}
+
+.show-counter .countdown > span {
+    line-height: 1rem;
+}
