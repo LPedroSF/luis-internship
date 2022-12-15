@@ -48,9 +48,9 @@ const ExploreItems = () => {
         </select>
       </div>
       {loading ? (
-        posts.slice(0, 8).map((post) => (
-          <div
-          key={post.id}
+        new Array(8).fill(0).map((_, index) => (
+          <div data-aos="fade-in" data-aos-easing="ease"
+          key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
           style={{ display: "block", backgroundSize: "cover" }}
         >
@@ -64,9 +64,9 @@ const ExploreItems = () => {
                 <Skeleton width="100%" height="50px" borderRadius="100%"/>
               </Link>
             </div>
-            <div className={`${post.expiryDate ? "de_countdown" : ""}`}>
+            <div className={`${posts.expiryDate ? "de_countdown" : ""}`}>
               {
-                post.expiryDate ?
+                posts.expiryDate ?
                   <Skeleton width="100px"/>
                 : ""
               }

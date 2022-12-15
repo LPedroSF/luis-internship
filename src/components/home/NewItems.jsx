@@ -5,6 +5,10 @@ import OwlCarousel from 'react-owl-carousel';
 import Skeleton from "../UI/Skeleton";
 import CountdownTimer from "../CountdownTimer";
 import '../hooks/countdown.css'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const NewItems = () => {
   const [posts, setPosts] = useState([]);
@@ -38,7 +42,7 @@ const NewItems = () => {
   }, []);
 
   return (
-    <section id="section-items" className="no-bottom">
+    <section id="section-items" className="no-bottom" data-aos="fade-in" data-aos-delay="250" data-aos-anchor-placement="top-center">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

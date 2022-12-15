@@ -4,7 +4,10 @@ import React, { useEffect, useState, useRef} from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
 import Skeleton from "../UI/Skeleton";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+AOS.init();
 
 const HotCollections = () => {
   const { nftId } = useParams();
@@ -35,7 +38,7 @@ const HotCollections = () => {
   },[]);
 
   return (
-    <section id="section-collections" className="no-bottom">
+    <section id="section-collections" className="no-bottom" data-aos="fade-in" data-aos-anchor-placement="top-center">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
