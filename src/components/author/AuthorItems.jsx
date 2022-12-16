@@ -28,8 +28,8 @@ const AuthorItems = () => {
         <div className="row">
           {loading ? (
             <>
-            {posts.nftCollection.map(post => (
-              <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={post.id}>
+            {new Array(8).fill(0).map((_, index) => (
+              <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link to="">
@@ -54,7 +54,7 @@ const AuthorItems = () => {
                       </div>
                     </div>
                   </div>
-                  <Link to={`/item-details/${post.nftId}`}>
+                  <Link to={`/item-details`}>
                     <Skeleton width="100%" height="270px" borderRadius="10px"/>
                   </Link>
                 </div>
