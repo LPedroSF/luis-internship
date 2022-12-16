@@ -56,7 +56,7 @@ const NewItems = () => {
               <OwlCarousel margin={10} nav loop {...settings}>
                 {posts.map((post) => (
                   <div key={post.id} className="nft__item">
-                    <div className="author_list_pp" onClick={() => navigate(`${post.authorId}`)}>
+                    <div className="author_list_pp">
                       <Link
                         to={`/author/${post.authorId}`}
                         data-bs-toggle="tooltip"
@@ -74,7 +74,7 @@ const NewItems = () => {
                           : ""
                       }
                     </div>
-                    <div className="nft__item_wrap" onClick={() => navigate(`${post.nftId}`)}>
+                    <div className="nft__item_wrap">
                       <div className="nft__item_extra">
                         <div className="nft__item_buttons">
                           <button>Buy Now</button>
@@ -120,7 +120,7 @@ const NewItems = () => {
               <OwlCarousel {...settings}>
                 {posts.map((post) => (
                   <div key={post.id} className="nft__item">
-                    <div className="author_list_pp" onClick={() => navigate(`${post.authorId}`)}>
+                    <div className="author_list_pp">
                       <Link
                         to={`/author/${post.authorId}`}
                         data-bs-toggle="tooltip"
@@ -137,7 +137,7 @@ const NewItems = () => {
                           : ""
                       }
                     </div>
-                    <div className="nft__item_wrap" onClick={() => navigate(`${post.nftId}`)}>
+                    <div className="nft__item_wrap">
                       <div className="nft__item_extra">
                         <div className="nft__item_buttons">
                           <button>Buy Now</button>
@@ -156,12 +156,12 @@ const NewItems = () => {
                         </div>
                       </div>
 
-                      <Link to={`/item-details/${post.nftId}`}>
+                      <Link to={`/item-details`}>
                         <Skeleton width="100%" height="270px" borderRadius="10px" />
                       </Link>
                     </div>
                     <div className="nft__item_info">
-                      <Link to={`/item-details/${post.nftId}`}>
+                      <Link to={`/item-details/`}>
                         <h4><Skeleton width="50%"/></h4>
                       </Link>
                       <div className="nft__item_price"><h4><Skeleton width="25%"/></h4></div>
